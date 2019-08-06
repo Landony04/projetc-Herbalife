@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "herbalife-4e009",
+  "private_key_id": "0444dd8d6b7e7f41c7735096eec91d0ddf208cd5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCsU9zWBnMaef2R\nb81IREH29Qd/V6r/uv6S2TUJxV8/BsGTDptr47ZfLm/YowlS4fPjrole6/n3+MC6\nQ/iN6kD+D1hCX6zxfMm5qPqwiayiw+DvqDgaFh3mEaVpWOOcoJfz1r2WVaHym4Rg\nV1mGEd86lGcEpMR58cE7J9yRcKPea1+mDNzRe1s8Z0NmHMZbiqEPlFMEw8GNBWRU\n3//HOJ5wG8RFsg0SoESSeu5U49tSJ4PjxYY17hHQbspY1zjd1ByAVaO3hWvPCB3N\nDwwgLqghij8syysP1L10iSzmHHEPvTV2EhnuuYALn6DUw6TddddDbyULHOOctgSO\n1l42KZ0PAgMBAAECggEAByPFQuXlJX+tfRLowbJ4GS/8/yt7xjkAxsb1Zt2B10Uy\nNQx3s0m5Z+GX7RI0LiS8P+dkalzrzUn0Y6v4LFSwp5A5AnKfP1fqaA22aZlQd5JF\nS4W6J4BZoGhs8DL54QPB9noj50TOc3FRsOqzYQR0it2DK4RDu04J93kbUf40AD2T\nYPFRyJfYa3JdccSHIF3qQ8NEtGvfHUH+Paj+26dAjOrSr9SBtDJnzfu7VWkaj3Hh\n0/0mg/k0zSujXNqYw0iu62zoX/qxtcZU2P4CvtgDXx+RWQ++OzNoPdniQp+9ENcn\nocqdc4uKaPpFnO5scpAmZ9BEs28JJ1tG+EUFuWu/QQKBgQDcZYOHkjrwbCNTLpEL\nXai199p6UgyiEDn7Eeu1rqWmZrvXQbIEcXzdljzGuTjXzKuqI4qcl5YdVAwDdQz9\nKCzXfznYY9A071jvQOc2PfWMXwv9jEbEzIf9cejC8/zddWTl+jkQonrrVS2gJtA1\nLnxPZdETOJtJkpW8KCcy9/txRwKBgQDIKnXO6alv4sGb1MIxONsfN8Y2mPKmW5se\nJK9LixcL8JPnWTzy/5S2HGBiIFdCnwSgmBxwE/btIXUAB4j5o1iwKpvUiMyKLKX8\nhaV6OuVq5oXkPwNRT91hBvxsDs1bqkQs55jKY24NNP4VZMj3HagDtB8Z33TK6LFT\nWKDj33OZ+QKBgDAzb2GuBH/iVpNxor0mnag2bazE1wh2ngef8roIWSgcXcaFEqbQ\nHyvjGKWpipn/pCeQoFcA/A6r+/ihl9ah+7ShmYgOxFFfa0bgHfEJ+fLaMqggDrYp\nuTAfwnUooUvZydhWMjbGIjXnqhPViUGoSf2fWetnPOcJTQAalAAcpfwvAoGAW3Di\nPrMJ334Uek7Yo8nYeEtvdnOqrgq9MykJF5aj4aV2u8JNkKjnU8Zk1Y72rg2c/Ixg\nuWa1cCDPpULL9VcE5f2hEJep8RlyfojDTrJnKc3DrsCGkHfOp0uctvSQJecDnAv1\nBcgkd04VIMrY7+MRZRe8+YHWhfeFQpEDdvYWhmkCgYBLhF5rU06WC1lFNIkfqglP\nroJ6eGU5NJy5rbMGqBwsPl/78T0ET5vqWoC8Grn9c/AimgQaA0PBUHBkSKwlmS06\ncTCENQ/3Lsa+WxAUPUA2w/rf9GUmBcDdHE4WAZvT/6u7dj/jqGauybzHFsThTkmP\npgStLOOb0hzmT74sDekVEw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-00vay@herbalife-4e009.iam.gserviceaccount.com",
+  "client_id": "106178803256688966783",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-00vay%40herbalife-4e009.iam.gserviceaccount.com"
+}
