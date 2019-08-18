@@ -5,6 +5,7 @@ const Hapi = require('hapi')
 const inert = require('inert')
 const path = require('path')
 const routes = require('./routes')
+const site = require('./controllers/site')
 const vision = require('vision')
 
 const server = Hapi.Server({
@@ -23,6 +24,12 @@ async function init() {
         await server.register(inert)
         await server.register(vision)
 
+        server.state('user', {
+            ttl: 1000 * 60 * 60 * 24 * 7,
+            isSecure: process.env.NODE_ENV === 'prod',
+            encoding: 'base64json'
+        })
+
         server.views({
             engines: {
                 hbs: handlebars
@@ -33,6 +40,7 @@ async function init() {
             layoutPath: 'views'
         })
 
+        server.ext('onPreResponse', site.fileNotFound)
         server.route(routes)
 
         await server.start()
@@ -43,5 +51,13 @@ async function init() {
 
     console.log(`Servidor lanzado en: ${server.info.uri}`)
 }
+
+process.on('unhandledRejection', error => {
+    console.error('handleRejection', error.message, error)
+})
+
+process.on('unhandledException', error => {
+    console.error('unhandledException', error.message, error)
+})
 
 init()
