@@ -26,7 +26,7 @@ async function init() {
 
         server.state('user', {
             ttl: 1000 * 60 * 60 * 24 * 7,
-            isSecure: process.env.NODE_ENV === 'prod',
+            isSecure: process.env.NODE_ENV === 'production',
             encoding: 'base64json'
         })
 
