@@ -11,6 +11,7 @@ class Users {
 
     async create(data) {
         data.password = await this.constructor.encrypt(data.password)
+        console.log(data)
         const newUser = this.collection.push()
         newUser.set(data)
 

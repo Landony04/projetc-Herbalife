@@ -58,6 +58,27 @@ function login(req, h) {
     })
 }
 
+async function viewProduct(req, h) {
+    let data
+
+    try {
+        data = await products.getOne(req.params.id)
+        if (!data) {
+            console.log('!data')
+            return notFound(req, h)
+        }
+    } catch (error) {
+        console.error(error)
+    }
+
+    return h.view('products', {
+        title: 'Detalles del producto',
+        user: req.state.user,
+        product: data,
+        key: req.params.id
+    })
+}
+
 function notFound(req, h) {
     return h.view('404', {}, { layout: 'error-layout' }).code(404)
 }
@@ -68,5 +89,6 @@ module.exports = {
     login: login,
     notFound: notFound,
     product: product,
-    register: register
+    register: register,
+    viewProduct: viewProduct
 }

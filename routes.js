@@ -20,10 +20,13 @@ module.exports = [
                     name: Joi.string().required(),
                     email: Joi.string().email().required(),
                     password: Joi.string().required().min(6),
-                    status: 'AVAILABLE',
+                    status: Joi.string().default('AVAILABLE'),
                     gender: Joi.string().required(),
                     age: Joi.string().required(),
-                    address: Joi.string().required()
+                    address: Joi.string().required(),
+                    phone: Joi.string().required().min(8),
+                    volume: Joi.number().integer().default(0),
+                    level: Joi.number().integer().default(0)
                 },
                 failAction: user.failValidation
             }
@@ -37,7 +40,9 @@ module.exports = [
             validate: {
                 payload: {
                     name: Joi.string().required(),
-                    description: Joi.string().required()
+                    description: Joi.string().required(),
+                    points: Joi.number().required(),
+                    createAt: Joi.date().timestamp('unix')
                 },
                 failAction: user.failValidation
             }
@@ -48,6 +53,11 @@ module.exports = [
         method: 'GET',
         path: '/login',
         handler: site.login
+    },
+    {
+        method: 'GET',
+        path: '/products/{id}',
+        handler: site.viewProduct
     },
     {
         method: 'GET',
