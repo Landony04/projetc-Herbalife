@@ -10,7 +10,7 @@ const vision = require('vision')
 
 const server = Hapi.Server({
     port: process.env.port || 3000,
-    host: 'https://herbafile.herokuapp.com/',
+    host: 'http://18.236.137.229/',
     routes: {
         files: {
             relativeTo: path.join(__dirname, 'public')
