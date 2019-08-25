@@ -7,7 +7,7 @@ async function createUser(req, h) {
     let result
 
     try {
-        result = await users.create(req.payload)
+        result = await users.create(req.payload, req.state.user)
     } catch (error) {
         console.error(error)
         return h.view('register', {
@@ -62,7 +62,30 @@ async function validateUser(req, h) {
 
     return h.redirect('/').state('user', {
         name: result.name,
-        email: result.email
+        email: result.email,
+        role: result.role
+    })
+}
+
+async function setInvalidateUser(req, h) {
+    let result
+
+    try {
+        result = await req.server.methods.setInvalidateUser(req.params.id)
+
+        if (!result) {
+            console.log('!result')
+            return notFound(req, h)
+        }
+    } catch (error) {
+        console.error(error)
+    }
+
+    return h.view('users', {
+        title: 'Socios',
+        user: req.state.user,
+        key: req.params.id,
+        success: 'Se ha deshabilitado el usuario'
     })
 }
 
@@ -70,5 +93,6 @@ module.exports = {
     createUser: createUser,
     failValidation: failValidation,
     logout: logout,
+    setInvalidateUser: setInvalidateUser,
     validateUser: validateUser
 }

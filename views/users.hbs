@@ -1,0 +1,48 @@
+<div class="alert alert-primary" role="alert">
+    <p class="mb-0"><strong>Usuarios creados en la plataforma</strong></p>
+</div>
+
+<div class="container" style="margin-top: 70px;">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Estado del usuario</th>
+                <th>Pedidos</th>
+            </tr>
+        </thead>
+        {{#each users as |users key|}}
+        <tbody>
+            <tr>
+                <td>{{users.id}}</td>
+                <td> {{users.name}}</td>
+                <td> {{users.email}}</td>
+                <td>
+                    {{#with users.status}}
+                    {{#ifEquals users.status 'AVAILABLE'}}
+                    <a href="/desactive-users/{{key}}" class="btn btn-success" role="button">HABILITADO</a>
+                    {{else}}
+                    <button class="btn btn-warning" (click)="selectContact(contact)">DESHABILITADO</button>
+                    {{/ifEquals}}
+                    {{/with}}
+                </td>
+                <td><span class="badge badge-primary badge-pill">{{users.orders}}</span></td>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+    <div class="card text-center" *ngIf="selectedContact">
+        <div class="card-header">
+            {{users.id}}
+        </div>
+        <div class="card-block">
+            <h4 class="card-title">{{users.name}}</h4>
+            <p class="card-text">
+                {{selectedContact.description}}
+            </p>
+        </div>
+    </div>
+</div>
+</div>
