@@ -1,0 +1,32 @@
+<div class="container">
+    <h2 class="mb-4">PEDIDOS</h2>
+    <div class="container" style="margin-top: 70px;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Socio</th>
+                    <th>Direccion</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            {{#each orders as |orders key|}}
+            <tbody>
+                {{#ifEquals orders.status 'PENDING'}}
+                <tr href="/products/{{key}}">
+                    <td>{{orders.id}}</td>
+                    <td> {{orders.owner.name}}</td>
+                    <td> {{orders.address}}</td>
+                    <td> {{orders.points}} pts</td>
+                    <td> {{orders.quantity}}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="selectContact(contact)">LIBERAR PEDIDO</button>
+                    </td>
+                </tr>
+                {{/ifEquals}}
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+</div> <!-- /container -->

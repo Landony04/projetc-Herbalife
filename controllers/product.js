@@ -15,13 +15,10 @@ async function createProduct(req, h) {
         }).code(500).takeover()
     }
 
-    return h.response(`Producto creado con ID ${result}`)
-
-    /*
     return h.view('product', {
         title: 'Producto',
         success: 'Producto creado exitosamente'
-    })*/
+    })
 }
 
 module.exports = {

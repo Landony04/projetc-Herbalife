@@ -27,6 +27,13 @@ class Products {
 
         return data
     }
+
+    async getProducts() {
+        const query = await this.collection.once('value')
+        const data = query.val()
+
+        return data
+    }
 }
 
 module.exports = Products

@@ -9,9 +9,11 @@ class Users {
         this.collection = this.ref.child('users')
     }
 
-    async create(data) {
+    async create(data, user) {
+        if (user != null) {
+            data.owner = user
+        }
         data.password = await this.constructor.encrypt(data.password)
-        console.log(data)
         const newUser = this.collection.push()
         newUser.set(data)
 
@@ -38,6 +40,37 @@ class Users {
         const hashPassword = await bcrypt.hash(password, saltRounds)
 
         return hashPassword
+    }
+
+    async getUsers() {
+        const query = await this.collection.once('value')
+        const data = query.val()
+
+        return data
+    }
+
+    async setInvalidateUser(userId) {
+        const query = await this.collection.child(userId).once('value')
+        const user = query.val()
+        var status = user.status
+
+        status = 'UNAVAILABLE'
+        const update = await this.collection.child(userId).update({ 'status': status })
+        console.log(update)
+        return update
+    }
+
+    async setActiveUser(userId) {
+        const query = await this.collection.child(userId).once('value')
+        const user = query.val()
+        var status = user.status
+
+        status = 'AVAILABLE'
+
+        const update = await this.collection.child(userId).update({ 'status': status })
+        console.log(update)
+
+        return update
     }
 }
 

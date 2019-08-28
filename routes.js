@@ -4,6 +4,7 @@ const Joi = require('joi')
 const site = require('./controllers/site')
 const user = require('./controllers/user')
 const product = require('./controllers/product')
+const order = require('./controllers/orders')
 
 module.exports = [
     {
@@ -26,7 +27,9 @@ module.exports = [
                     address: Joi.string().required(),
                     phone: Joi.string().required().min(8),
                     volume: Joi.number().integer().default(0),
-                    level: Joi.number().integer().default(0)
+                    level: Joi.number().integer().default(0),
+                    orders: Joi.number().integer().default(0),
+                    role: Joi.string().default('CLIENT')
                 },
                 failAction: user.failValidation
             }
@@ -42,12 +45,29 @@ module.exports = [
                     name: Joi.string().required(),
                     description: Joi.string().required(),
                     points: Joi.number().required(),
+                    price: Joi.number().required(),
+                    status: Joi.string().default('EXISTING'),
                     createAt: Joi.date().timestamp('unix')
                 },
                 failAction: user.failValidation
             }
         },
         handler: product.createProduct
+    },
+    {
+        method: 'POST',
+        path: '/create-orders',
+        options: {
+            validate: {
+                payload: {
+                    quantity: Joi.number().required(),
+                    address: Joi.string().required(),
+                    status: Joi.string().default('PENDING'),
+                    idProduct: Joi.string()
+                }
+            }
+        },
+        handler: order.createOrder
     },
     {
         method: 'GET',
@@ -61,6 +81,16 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/products',
+        handler: site.getProducts
+    },
+    {
+        method: 'GET',
+        path: '/orders-admin',
+        handler: site.getOrders
+    },
+    {
+        method: 'GET',
         path: '/logout',
         handler: user.logout
     },
@@ -71,8 +101,33 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/add-partners',
+        handler: site.addPartners
+    },
+    {
+        method: 'GET',
+        path: '/add-orders',
+        handler: site.addOrders
+    },
+    {
+        method: 'GET',
         path: '/product',
         handler: site.product
+    },
+    {
+        method: 'GET',
+        path: '/users',
+        handler: site.user
+    },
+    {
+        method: 'GET',
+        path: '/desactive-users/{id}',
+        handler: user.setInvalidateUser
+    },
+    {
+        method: 'GET',
+        path: '/active-users/{id}',
+        handler: user.setActiveUser
     },
     {
         method: 'POST',
