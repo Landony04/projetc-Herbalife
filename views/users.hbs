@@ -24,7 +24,7 @@
                     {{#ifEquals users.status 'AVAILABLE'}}
                     <a href="/desactive-users/{{key}}" class="btn btn-success" role="button">HABILITADO</a>
                     {{else}}
-                    <button class="btn btn-warning" (click)="selectContact(contact)">DESHABILITADO</button>
+                    <a href="/active-users/{{key}}" class="btn btn-warning" role="button">DESHABILITADO</a>
                     {{/ifEquals}}
                     {{/with}}
                 </td>

@@ -26,6 +26,7 @@ async function init() {
         await server.register(vision)
 
         server.method('setInvalidateUser', methods.setInvalidateUser)
+        server.method('setActiveUser', methods.setActiveUser)
 
         server.state('user', {
             ttl: 1000 * 60 * 60 * 24 * 7,

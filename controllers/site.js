@@ -2,6 +2,7 @@
 
 const products = require('../models/index').products
 const users = require('../models/index').users
+const orders = require('../models/index').orders
 
 function addPartners(req, h) {
     if (!req.state.user) {
@@ -11,6 +12,25 @@ function addPartners(req, h) {
     return h.view('add-partners', {
         title: 'Agregar asociado',
         user: req.state.user
+    })
+}
+
+async function addOrders(req, h) {
+    if (!req.state.user) {
+        return h.redirect('/login')
+    }
+
+    let data
+    try {
+        data = await products.getProducts()
+    } catch (error) {
+        console.error(error)
+    }
+
+    return h.view('add-orders', {
+        title: 'Agregar pedido',
+        user: req.state.user,
+        products: data
     })
 }
 
@@ -46,6 +66,26 @@ function product(req, h) {
     return h.view('add-product', {
         title: 'Crear producto',
         user: req.state.user
+    })
+}
+
+async function getOrders(req, h) {
+    if (!req.state.user) {
+        return h.redirect('/login')
+    }
+
+    let data
+    try {
+        data = await orders.getOrders()
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
+
+    return h.view('orders-admin', {
+        title: 'Listado de ordenes',
+        user: req.state.user,
+        orders: data
     })
 }
 
@@ -96,7 +136,6 @@ async function viewProduct(req, h) {
     try {
         data = await products.getOne(req.params.id)
         if (!data) {
-            console.log('!data')
             return notFound(req, h)
         }
     } catch (error) {
@@ -134,8 +173,10 @@ async function user(req, h) {
 }
 
 module.exports = {
+    addOrders: addOrders,
     addPartners: addPartners,
     fileNotFound: fileNotFound,
+    getOrders: getOrders,
     getProducts: getProducts,
     home: home,
     login: login,

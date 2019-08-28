@@ -1,0 +1,94 @@
+<style>
+    .dropdown-toggle {
+        color: #FFF !important;
+    }
+
+    #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 12px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+    }
+
+    #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #myUL li a {
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block;
+    }
+
+    #myUL li a:hover:not(.header) {
+        background-color: #eee;
+    }
+</style>
+<script>
+    function filter() {
+        var input, filter, ul, li, a, i, txtValue
+
+        input = document.getElementById('myInput')
+        filter = input.value.toUpperCase()
+        ul = document.getElementById("myUL")
+        li = ul.getElementsByTagName('li')
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0]
+            txtValue = a.textContent || a.innerText
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = ""
+            } else {
+                li[i].style.display = "none"
+            }
+        }
+    }
+</script>
+<div class="container mt-4">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Crear pedido</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <form method="POST" action="create-orders">
+                        <div class="form-group">
+                            <input type="text" id="myInput" onkeyup="filter()" placeholder="Buscar por nombre..">
+                            <ul id="myUL">
+                                {{#each products as |products key|}}
+                                <li><a id="product" onclick="setValue()">{{products.name}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="text">Cantidad</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity"
+                                placeholder="Ingrese cantidad del producto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="text">Dirección de entrega</label>
+                            <input type="text" class="form-control" id="address" name="address"
+                                placeholder="Ingrese la dirección" required>
+                        </div>
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-primary">Pedir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

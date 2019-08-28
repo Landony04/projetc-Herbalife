@@ -4,6 +4,7 @@ const Joi = require('joi')
 const site = require('./controllers/site')
 const user = require('./controllers/user')
 const product = require('./controllers/product')
+const order = require('./controllers/orders')
 
 module.exports = [
     {
@@ -54,6 +55,21 @@ module.exports = [
         handler: product.createProduct
     },
     {
+        method: 'POST',
+        path: '/create-orders',
+        options: {
+            validate: {
+                payload: {
+                    quantity: Joi.number().required(),
+                    address: Joi.string().required(),
+                    status: Joi.string().default('PENDING'),
+                    idProduct: Joi.string()
+                }
+            }
+        },
+        handler: order.createOrder
+    },
+    {
         method: 'GET',
         path: '/login',
         handler: site.login
@@ -67,6 +83,11 @@ module.exports = [
         method: 'GET',
         path: '/products',
         handler: site.getProducts
+    },
+    {
+        method: 'GET',
+        path: '/orders-admin',
+        handler: site.getOrders
     },
     {
         method: 'GET',
@@ -85,6 +106,11 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/add-orders',
+        handler: site.addOrders
+    },
+    {
+        method: 'GET',
         path: '/product',
         handler: site.product
     },
@@ -97,6 +123,11 @@ module.exports = [
         method: 'GET',
         path: '/desactive-users/{id}',
         handler: user.setInvalidateUser
+    },
+    {
+        method: 'GET',
+        path: '/active-users/{id}',
+        handler: user.setActiveUser
     },
     {
         method: 'POST',

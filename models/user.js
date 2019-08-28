@@ -59,6 +59,19 @@ class Users {
         console.log(update)
         return update
     }
+
+    async setActiveUser(userId) {
+        const query = await this.collection.child(userId).once('value')
+        const user = query.val()
+        var status = user.status
+
+        status = 'AVAILABLE'
+
+        const update = await this.collection.child(userId).update({ 'status': status })
+        console.log(update)
+
+        return update
+    }
 }
 
 module.exports = Users
