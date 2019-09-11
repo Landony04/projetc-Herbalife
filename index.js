@@ -11,7 +11,7 @@ const site = require('./controllers/site')
 const vision = require('vision')
 
 const server = Hapi.Server({
-    port: process.env.port || 3000,
+    port: process.env.port || 5000,
     host: 'https://herbafile.herokuapp.com/',
     routes: {
         files: {
