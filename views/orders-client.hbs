@@ -1,17 +1,6 @@
 <div class="container">
     <h2 class="mb-4">PEDIDOS</h2>
     <div class="container" style="margin-top: 70px;">
-        {{#with error}}
-        <div class="alert alert-danger" role="alert">
-            {{this}}
-        </div>
-        {{/with}}
-
-        {{#with success}}
-        <div class="alert alert-success" role="alert">
-            {{this}}
-        </div>
-        {{/with}}
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -20,20 +9,19 @@
                     <th>Direccion</th>
                     <th>Producto</th>
                     <th>Cantidad</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             {{#each orders as |orders key|}}
             <tbody>
-                {{#ifEquals orders.status 'PENDING'}}
-                <tr>
+                {{#ifEquals orders.owner.email ../user.email}}
+                <tr href="/products/{{key}}">
                     <td>{{orders.id}}</td>
                     <td> {{orders.owner.name}}</td>
                     <td> {{orders.address}}</td>
                     <td> {{orders.name}}</td>
                     <td> {{orders.quantity}}</td>
-                    <td>
-                        <a class="btn btn-success" href="/delivered-order/{{key}}" role="button">LIBERAR PEDIDO</button>
-                    </td>
+                    <td> {{orders.status}}</td>
                 </tr>
                 {{/ifEquals}}
             </tbody>

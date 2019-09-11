@@ -28,8 +28,8 @@ module.exports = [
                     phone: Joi.string().required().min(8),
                     volume: Joi.number().integer().default(0),
                     level: Joi.number().integer().default(0),
-                    orders: Joi.number().integer().default(0),
-                    role: Joi.string().default('CLIENT')
+                    role: Joi.string().default('CLIENT'),
+                    timestamp: Joi.date().timestamp()
                 },
                 failAction: user.failValidation
             }
@@ -60,10 +60,10 @@ module.exports = [
         options: {
             validate: {
                 payload: {
+                    name: Joi.string().default('Test'),
                     quantity: Joi.number().required(),
                     address: Joi.string().required(),
                     status: Joi.string().default('PENDING'),
-                    idProduct: Joi.string()
                 }
             }
         },
@@ -88,6 +88,11 @@ module.exports = [
         method: 'GET',
         path: '/orders-admin',
         handler: site.getOrders
+    },
+    {
+        method: 'GET',
+        path: '/orders-client',
+        handler: site.getOrdersClient
     },
     {
         method: 'GET',
@@ -128,6 +133,11 @@ module.exports = [
         method: 'GET',
         path: '/active-users/{id}',
         handler: user.setActiveUser
+    },
+    {
+        method: 'GET',
+        path: '/delivered-order/{id}',
+        handler: order.deliveredOrder
     },
     {
         method: 'POST',

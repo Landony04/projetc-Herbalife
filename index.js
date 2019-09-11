@@ -2,6 +2,7 @@
 
 const handlebars = require('./lib/helpers')
 const Hapi = require('hapi')
+const good = require('good')
 const inert = require('inert')
 const methods = require('./lib/methods')
 const path = require('path')
@@ -24,9 +25,29 @@ async function init() {
     try {
         await server.register(inert)
         await server.register(vision)
+        await server.register({
+            plugin: good,
+            options: {
+                reporters: {
+                    console: [
+                        {
+                            module: 'good-console',
+                        },
+                        'stdout'
+                    ]
+                }
+            }
+        })
+        await server.register({
+            plugin: require('./lib/api'),
+            options: {
+                prefix: 'api'
+            }
+        })
 
         server.method('setInvalidateUser', methods.setInvalidateUser)
         server.method('setActiveUser', methods.setActiveUser)
+        server.method('deliveredOrder', methods.deliveredOrder)
 
         server.state('user', {
             ttl: 1000 * 60 * 60 * 24 * 7,
@@ -50,18 +71,18 @@ async function init() {
         await server.start()
     } catch (error) {
         console.error(error)
-        process.exit
+        process.exit(1)
     }
 
-    console.log(`Servidor lanzado en: ${server.info.uri}`)
+    server.log('info', `Servidor lanzado en: ${server.info.uri}`)
 }
 
 process.on('unhandledRejection', error => {
-    console.error('handleRejection', error.message, error)
+    server.error('handleRejection', error)
 })
 
 process.on('unhandledException', error => {
-    console.error('unhandledException', error.message, error)
+    server.error('unhandledException', error)
 })
 
 init()

@@ -70,24 +70,13 @@ async function validateUser(req, h) {
 
 async function setInvalidateUser(req, h) {
     let result
-
     try {
         result = await req.server.methods.setInvalidateUser(req.params.id)
-
-        if (!result) {
-            console.log('!result')
-            return h.view('users', {
-                title: 'Socios',
-                user: req.state.user,
-                key: req.params.id,
-                error: 'Se ha deshabilitado el usuario'
-            })
-        }
     } catch (error) {
         console.error(error)
     }
 
-    return h.view('users', {
+    return h.redirect('/users', {
         title: 'Socios',
         user: req.state.user,
         key: req.params.id,
@@ -97,24 +86,13 @@ async function setInvalidateUser(req, h) {
 
 async function setActiveUser(req, h) {
     let result
-
     try {
         result = await req.server.methods.setActiveUser(req.params.id)
-
-        if (!result) {
-            console.log('!result')
-            return h.view('users', {
-                title: 'Socios',
-                user: req.state.user,
-                key: req.params.id,
-                error: 'Se ha activado el usuario'
-            })
-        }
     } catch (error) {
         console.log(error)
     }
 
-    return h.view('users', {
+    return h.redirect('/users', {
         title: 'Socios',
         user: req.state.user,
         key: req.params.id,

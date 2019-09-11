@@ -13,6 +13,7 @@ class Users {
         if (user != null) {
             data.owner = user
         }
+
         data.password = await this.constructor.encrypt(data.password)
         const newUser = this.collection.push()
         newUser.set(data)
@@ -50,27 +51,27 @@ class Users {
     }
 
     async setInvalidateUser(userId) {
-        const query = await this.collection.child(userId).once('value')
-        const user = query.val()
-        var status = user.status
-
-        status = 'UNAVAILABLE'
-        const update = await this.collection.child(userId).update({ 'status': status })
-        console.log(update)
-        return update
+        return await this.collection.child(userId).update({
+            status: 'UNAVAILABLE'
+        }, function (error) {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('success')
+            }
+        });
     }
 
     async setActiveUser(userId) {
-        const query = await this.collection.child(userId).once('value')
-        const user = query.val()
-        var status = user.status
-
-        status = 'AVAILABLE'
-
-        const update = await this.collection.child(userId).update({ 'status': status })
-        console.log(update)
-
-        return update
+        return await this.collection.child(userId).update({
+            status: 'AVAILABLE'
+        }, function (error) {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('success')
+            }
+        });
     }
 }
 
