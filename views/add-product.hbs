@@ -11,6 +11,12 @@
                         {{this}}
                     </div>
                     {{/with}}
+
+                    {{#with success}}
+                    <div class="alert alert-success" role="alert">
+                        {{this}}
+                    </div>
+                    {{/with}}
                     <form method="POST" action="/create-product" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Nombre Producto</label>

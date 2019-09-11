@@ -77,12 +77,30 @@ async function getOrders(req, h) {
     let data
     try {
         data = await orders.getOrders()
-        console.log(data)
     } catch (error) {
         console.log(error)
     }
 
     return h.view('orders-admin', {
+        title: 'Listado de ordenes',
+        user: req.state.user,
+        orders: data
+    })
+}
+
+async function getOrdersClient(req, h) {
+    if (!req.state.user) {
+        return h.redirect('/login')
+    }
+
+    let data
+    try {
+        data = await orders.getOrders()
+    } catch (error) {
+        console.log(error)
+    }
+
+    return h.view('orders-client', {
         title: 'Listado de ordenes',
         user: req.state.user,
         orders: data
@@ -177,6 +195,7 @@ module.exports = {
     addPartners: addPartners,
     fileNotFound: fileNotFound,
     getOrders: getOrders,
+    getOrdersClient: getOrdersClient,
     getProducts: getProducts,
     home: home,
     login: login,
